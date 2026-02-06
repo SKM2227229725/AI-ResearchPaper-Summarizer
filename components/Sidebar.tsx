@@ -74,7 +74,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, onNavigate, isOpen = tru
         </nav>
 
         <div className="p-6 border-t border-slate-800 text-xs text-slate-500 text-center">
-          Powered by Gemini 3 Flash<br />
+          Powered by insighthub<br />
           &copy; 2024 Research AI
         </div>
       </div>
