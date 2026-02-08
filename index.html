@@ -6,27 +6,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Research Insight Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="%233b82f6" opacity="0.5"/><circle cx="12" cy="12" r="4" fill="%233b82f6"/></svg>') 12 12, auto;
+        }
+        
+        a, button, input[type="submit"], [role="button"] {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="10" fill="%236366f1" opacity="0.6"/><circle cx="14" cy="14" r="5" fill="%236366f1"/></svg>') 14 14, pointer;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f8fafc;
             scroll-behavior: smooth;
+            transition: background-color 0.3s ease;
         }
+        
+        .dark body {
+            background-color: #0f172a;
+        }
+        
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
             background: #f1f1f1;
         }
+        .dark .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
         .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #cbd5e1;
             border-radius: 10px;
         }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+        
+        /* Smooth transitions for interactive elements */
+        button, a, input, select, textarea {
+            transition: all 0.2s ease;
+        }
+        
+        /* Animated gradient background */
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .animate-gradient {
+            background-size: 200% 200%;
+            animation: gradient 15s ease infinite;
         }
     </style>
 <script type="importmap">

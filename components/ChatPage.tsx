@@ -19,7 +19,7 @@ const LANGUAGES = [
     { code: 'en-US', label: 'English' },
     { code: 'hi-IN', label: 'Hindi' },
     { code: 'mr-IN', label: 'Marathi' },
-    { code: 'hinglish', label: 'Hinglish' } // Custom handling for Hinglish
+    { code: 'hinglish', label: 'Hinglish' }
 ];
 
 const ChatPage: React.FC<ChatPageProps> = ({ documents, selectedDocId, onSelectDoc }) => {
@@ -91,8 +91,7 @@ const ChatPage: React.FC<ChatPageProps> = ({ documents, selectedDocId, onSelectD
         const voices = window.speechSynthesis.getVoices();
         let langCode = selectedLang === 'hinglish' ? 'hi-IN' : selectedLang;
 
-        // If selected is English but text looks Hindi (devanagari), switch? 
-        // Hard to detect perfectly without lib, so we follow selected preference or default.
+
 
         const voice = voices.find(v => v.lang.includes(langCode.split('-')[0]));
         if (voice) utterance.voice = voice;
