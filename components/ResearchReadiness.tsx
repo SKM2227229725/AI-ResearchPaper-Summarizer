@@ -41,20 +41,48 @@ const ResearchReadiness: React.FC<ResearchReadinessProps> = ({ document, documen
         setResult(null);
 
         try {
+            console.log('Sending evaluation request to backend...');
             const response = await axios.post('https://researchpapersummizer-backend.onrender.com/api/research-readiness/', {
                 text: document.content
             }, {
                 timeout: 60000 // 60 second timeout for backend wake-up
             });
 
+            console.log('Backend response received:', response.data);
+
+            // Validate response structure
+            if (!response.data) {
+                throw new Error('Empty response from backend');
+            }
+
+            // Check for required fields
+            const requiredFields = ['novelty_score', 'technical_depth_score', 'experimental_rigor_score',
+                'literature_coverage_score', 'publication_readiness_score',
+                'strengths', 'weaknesses', 'suggestions', 'suitable_venues', 'final_verdict'];
+
+            const missingFields = requiredFields.filter(field => response.data[field] === undefined);
+            if (missingFields.length > 0) {
+                console.error('Missing fields in backend response:', missingFields);
+                throw new Error(`Backend response missing fields: ${missingFields.join(', ')}`);
+            }
+
             setResult(response.data);
+            console.log('Results set successfully');
         } catch (err: any) {
-            console.error('Research readiness API error:', err);
-            setError(
-                err.response?.data?.message ||
-                err.message ||
-                'Failed to evaluate research readiness. The backend may be waking up (first request can take 30-60 seconds).'
-            );
+            console.error('Research readiness evaluation error:', err);
+            console.error('Error details:', {
+                code: err.code,
+                message: err.message,
+                response: err.response?.data
+            });
+
+            if (err.code === 'ECONNABORTED') {
+                setError('Request timed out. The backend may be waking up (can take 30-60 seconds on first request). Please try again.');
+            } else if (err.response) {
+                setError(`Backend error (${err.response.status}): ${JSON.stringify(err.response.data)}`);
+            } else {
+                setError(`Failed to evaluate: ${err.message}`);
+            }
         } finally {
             setIsLoading(false);
         }
@@ -210,7 +238,7 @@ const ResearchReadiness: React.FC<ResearchReadinessProps> = ({ document, documen
                         {/* Overall Verdict */}
                         <div className="text-center py-6">
                             <VerdictBadge
-                                verdict={result.final_verdict}
+                                verdict={result?.final_verdict || 'Unknown'}
                                 score={getAverageScore()}
                             />
                         </div>
