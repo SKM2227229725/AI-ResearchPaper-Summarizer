@@ -13,7 +13,7 @@ A powerful, full-stack application for managing, summarizing, and querying resea
 - **Responsive Design**: Beautiful, modern UI built with Tailwind CSS.
 
 ---
-*Created by Ashish *
+*Created by Shailesh Kumar *
 
 ## 🛠️ Prerequisites
 
