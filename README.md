@@ -1,6 +1,6 @@
 # AI Research Insight Hub
 
-A powerful, full-stack application for managing, summarizing, and querying research papers using advanced AI. This project combines a modern React frontend with a robust Django backend to provide PDF text extraction, AI-powered summarization, technical insight extraction, and semantic search.
+A powerful, full-stack application for managing, summarizing, and querying research papers using advanced AI. This project combines a modern React frontend with a robust Django backend to provide PDF text extraction, AI-powered summarization, technical insight extraction, and semantic search. this website any research large size pdf convert in to small size only key points pdf.
 
 ## ✨ Features
 
